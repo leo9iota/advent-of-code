@@ -6,7 +6,7 @@ const traverse2DArray = (inputArray: string[][]) => {
   for (let i = 0; i < inputArray.length; i++) {
     for (let j = 0; j < inputArray[i].length; j++) {
       console.log(inputArray[i][j]);
-      outputArray.push(inputArray[i][j])
+      outputArray.push([inputArray[i][j]]);
     }
   }
 
