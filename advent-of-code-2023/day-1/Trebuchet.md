@@ -28,11 +28,16 @@ To begin, get your [puzzle input](https://adventofcode.com/2023/day/1/input).
 ## Pseudocode
 
 ```txt
-read file
+open file "input.txt" for reading
 
-loop input.string[i]
-    input
-    
+initialize variable sum_calibration_values to 0
 
+for each line in file:
+    find the first digit in the line
+    find the last digit in the line
+    combine the first and last digits to form a two-digit number
+    convert the two-digit number to an integer
+    add the integer to sum_of_calibration_values
 
+close the file
 ```
