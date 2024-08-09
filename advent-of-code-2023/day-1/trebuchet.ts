@@ -1,23 +1,17 @@
 import { promises as fs } from 'node:fs';
 
-async function detectLineEndings(filePath: string) {
+async function computeCalibrationValues(filePath: string) {
     try {
-        const data = await fs.readFile(filePath);
-        const content = data.toString('utf-8');
+        const data = await fs.readFile(filePath, 'utf-8');
+        const lines = data.split('\n')
+        let sumCalibrationValues = 0;
 
-        if (content.includes('\r\n')) {
-            console.log('The file uses CRLF (Windows) line endings.');
-            console.log(data.toString());
-        } else if (content.includes('\n')) {
-            console.log('The file uses LF (Unix) line endings.');
-            console.log(data.toString());
-        } else {
-            console.log('The file does no   t contain any standard line endings.');
-            console.log(data.toString());
+        for (const line of lines) {
+            
         }
-    } catch (err) {
-        console.error('Error reading file:', err);
+    } catch (error) {
+        console.error(error);
     }
 }
 
-detectLineEndings('./advent-of-code-2023/day-1/input.txt');
+computeCalibrationValues('./advent-of-code-2023/day-1/input.txt');
