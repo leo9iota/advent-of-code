@@ -1,48 +1,97 @@
-import { promises as fs } from 'node:fs';
+import * as fs from 'fs';
 
-// const exampleInput = ['1abc2', 'pqr3stu8vwx', 'a1b2c3d4e5f', 'treb7uchet'];
+interface Puzzle {
+    solvePart1(): string;
+    solvePart2(): string;
+}
 
-async function computeCalibrationValues(filePath: string) {
-    try {
-        const data: string = await fs.readFile(filePath, 'utf-8'); // Read from file using UTF-8 format
-        const lines: string[] = data.split('\n'); // Split lines into separate strings
-        const regexPattern = /\b(one|two|three|four|five|six|seven|eight|nine)\b/;
-        let sumCalibrationValues: number = 0; // Initialize sum variable
+class Day implements Puzzle {
+    private input: string;
 
-        // Loop over the separate strings
-        for (const line of lines) {
-            let firstDigit: number | null = null; // Initialize first digit variable
-            let lastDigit: number | null = null; // Initialize last digit variable
+    constructor(input: string) {
+        this.input = input;
+    }
 
-            for (let i = 0; i < line.length; i++) {
-                // Loop over the string by its length
-                const number: number = parseInt(line[i]); // Parses the single character to an integer
+    static create(input: string): Puzzle {
+        return new Day(input);
+    }
 
-                if (!isNaN(number)) {
-                    // Check if the parsed integer is a number
-                    if (firstDigit === null) {
-                        // Check if the first digit variable is still unassigned
-                        firstDigit = number; // Assign first digit to the number in the string
-                    }
-                    lastDigit = number; // Assign last digit to the number in the string
-                }
-            }
+    solvePart1(): string {
+        const result = this.solveInternal(false).toString();
+        console.log('Part 1 Result:', result);
+        return result;
+    }
 
-            if (firstDigit !== null && lastDigit !== null) {
-                // Check if first and last digit have been assigned
-                const twoDigitNumber = firstDigit * 10 + lastDigit; // Add them together (Note: the first digit is multiplied by 10 to form a two-digit number)
-                sumCalibrationValues += twoDigitNumber; // Add to the total sum
-            } else if (firstDigit !== null) {
-                // Check if theres only one digit
-                const twoDigitNumber = firstDigit * 10 + firstDigit; // Add them together (Note: the first digit is multiplied by 10 to form a two-digit number)
-                sumCalibrationValues += twoDigitNumber; // Add to the total sum
-            }
-        }
+    solvePart2(): string {
+        const result = this.solveInternal(true).toString();
+        console.log('Part 2 Result:', result);
+        return result;
+    }
 
-        console.log(`Sum of calibration values: ${sumCalibrationValues}`);
-    } catch (error) {
-        console.error(error);
+    private solveInternal(allowSpelledOut: boolean): number {
+        return this.input
+            .split('\n')
+            .map((line) => {
+                const digits = extractDigits(line, allowSpelledOut);
+                console.log(`Line: "${line}", Digits: ${digits}`);
+                return extractCalibrationValue(digits);
+            })
+            .reduce((a, b) => a + b, 0);
     }
 }
 
-computeCalibrationValues('./advent-of-code-2023/day-1/input.txt');
+function extractCalibrationValue(digits: number[]): number {
+    if (digits.length === 0) {
+        return 0; // Return 0 if no digits are found to avoid NaN.
+    }
+    const firstDigit = digits[0];
+    const lastDigit = digits[digits.length - 1];
+    return 10 * firstDigit + lastDigit;
+}
+
+function extractDigits(line: string, allowSpelledOut: boolean): number[] {
+    const regex = allowSpelledOut ? /^(one|two|three|four|five|six|seven|eight|nine|\d)/i : /^(\d)/;
+
+    const digits: number[] = [];
+    let match: RegExpExecArray | null;
+
+    for (let i = 0; i < line.length; i++) {
+        if ((match = regex.exec(line.slice(i)))) {
+            const digit = parseDigit(match[0]);
+            digits.push(digit);
+        }
+    }
+    return digits;
+}
+
+function parseDigit(digitStr: string): number {
+    switch (digitStr.toLowerCase()) {
+        case 'one':
+            return 1;
+        case 'two':
+            return 2;
+        case 'three':
+            return 3;
+        case 'four':
+            return 4;
+        case 'five':
+            return 5;
+        case 'six':
+            return 6;
+        case 'seven':
+            return 7;
+        case 'eight':
+            return 8;
+        case 'nine':
+            return 9;
+        default:
+            return parseInt(digitStr, 10);
+    }
+}
+
+// Running the Puzzle
+
+const fileInput = fs.readFileSync('./advent-of-code-2023/day-1/input.txt', 'utf-8');
+const puzzle = Day.create(fileInput);
+puzzle.solvePart1(); // This will print the result for Part 1
+puzzle.solvePart2(); // This will print the result for Part 2
