@@ -48,24 +48,41 @@ Your actual left and right lists contain many **location IDs**. What is the tota
 ---
 ## Notes
 
-- **Main Problem**: Finding the smallest number, second smallest number ..., and so on, from both lists, and then comparing them against each other.
+- **Main Problem**: Finding the smallest number, second smallest number, and so on, from both lists, and then comparing them against each other.
 - **Separator**: The list is white-space separated, which is important to consider when parsing the [input file](./historian-histeria-input.txt).
+
+### Requirements
+
+1. **Sorting**: Sorting both lists of numbers independently.
+2. **Pairing**: Pairing up the numbers by their sorted position, smallest with smallest, second-smallest with second-smallest, and so on.
+3. **Calculate**: Calculating the absolute difference between each paired set of numbers.
+4. **Add Up**: Summing all these differences to get the total distance.
 
 ### Pseudo Code
 
+Sorting both lists independently
+Pairing the sorted items by position
+Calculating the differences
+Summing the differences
+
+
 1. Iterarte through left list, sort from smallest to largest with indices
 2. Do the same with the left list.
+3. Pair the sorted items by position
+4. Calculate the differences
+5. Sum the differences
+
 
 ```lua
-function sort()
-   sorting_algo() 
-end
+left_list = {}
+right_list = {}
 
-for item in left_list do
-    sort().asc()
-end
+parse_list(left_list, right_list)
 
-for item in right_list do
-    sort().asc()
+sorted_list_left = sort(left_list)
+sorted_list_right = sort(right_list)
+
+function calc_diff()
+
 end
 ```
