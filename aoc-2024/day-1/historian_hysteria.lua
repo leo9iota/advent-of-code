@@ -1,8 +1,8 @@
 local location_id = 0 -- Location ID variable used to calculate distance
-local left_list = {}
-local right_list = {}
+local left_list = {} -- Table for left column in txt file
+local right_list = {} -- Table for right column in txt file
 
-function parse_file(path)
+function parse_list(path)
     local file = io.open(path, "r") -- Parse input file
 
     if not file then error("Could not open file") end -- Print error message if file couldn't be parsed
@@ -28,4 +28,6 @@ function parse_file(path)
     for _, value in ipairs(right_list) do print(value) end
 end
 
-parse_file("historian-hysteria-input.txt")
+parse_list("historian-hysteria-input.txt")
+
+
