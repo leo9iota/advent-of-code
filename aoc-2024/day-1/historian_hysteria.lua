@@ -1,47 +1,34 @@
-local location_id = 0 -- Location ID variable used to calculate distance
-local left_list = {} -- Table for left column in txt file
-local right_list = {} -- Table for right column in txt file
-
---- Function to parse the list
--- @param path The path of the file to parse
-function parse_list(path)
-    local file = io.open(path, "r") -- Parse input file
-
-    if not file then error("Could not open file") end -- Print error message if file couldn't be parsed
-
-    -- Read the file line by line
-    for line in file:lines() do
-        -- Match two numbers separated by whitespace
-        local num1, num2 = line:match("(%d+)%s+(%d+)")
-        if num1 and num2 then
-            -- Convert the numbers to integers and store them
-            table.insert(left_list, tonumber(num1))
-            table.insert(right_list, tonumber(num2))
+--- Function to parse both lists
+-- @param filename
+local function read_input(filename)
+    local left_list = {}
+    local right_list = {}
+    for line in io.lines(filename) do -- Parse line by line
+        local left, right = line:match("(%d+)%s+(%d+)") -- Use same pattern as before
+        if left and right then
+            table.insert(left_list, tonumber(left))
+            table.insert(right_list, tonumber(right))
         end
     end
-
-    file:close() -- IMPORTANT: Close file after processing it
-
-    -- Print the parsed columns
-    -- print("Column 1:")
-    -- for _, value in ipairs(left_list) do print(value) end
-
-    -- print("Column 2:")
-    -- for _, value in ipairs(right_list) do print(value) end
+    return left_list, right_list
 end
 
---- Function to calculate the distance
--- @param first_list The first list to sort 
--- @param second_list The second list to sort
--- function calc_distance(first_list, second_list)
---     first_list.sort()
---     second_list.sort()
+--- Function to calculate the total distance
+-- @param left_list
+-- @param right_list
+local function calc_distance(left_list, right_list)
+    table.sort(left_list)
+    table.sort(right_list)
+    local total_distance = 0
+    for i = 1, #left_list do total_distance = total_distance + math.abs(left_list[i] - right_list[i]) end -- The # operator gets the length of the table
+    return total_distance
+end
 
---     print(first_list, second_list)
--- end
+function main()
+    local input_file = "historian-hysteria-input.txt"
+    local left_list, right_list = read_input(input_file)
+    local total_distance = calc_distance(left_list, right_list)
+    print("Total distance: " .. total_distance)
+end
 
--- -- Fn calls
--- parse_list("historian-hysteria-input.txt")
--- calc_distance(left_list, right_list)
-
-
+main()
