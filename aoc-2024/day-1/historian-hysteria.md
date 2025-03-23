@@ -60,18 +60,11 @@ Your actual left and right lists contain many **location IDs**. What is the tota
 
 ### Pseudo Code
 
-Sorting both lists independently
-Pairing the sorted items by position
-Calculating the differences
-Summing the differences
-
-
 1. Iterarte through left list, sort from smallest to largest with indices
 2. Do the same with the left list.
 3. Pair the sorted items by position
 4. Calculate the differences
 5. Sum the differences
-
 
 ```lua
 left_list = {}
@@ -82,7 +75,7 @@ parse_list(left_list, right_list)
 sorted_list_left = sort(left_list)
 sorted_list_right = sort(right_list)
 
-function calc_diff()
-
+function sort_list()
+    
 end
 ```
