@@ -2,6 +2,8 @@ local location_id = 0 -- Location ID variable used to calculate distance
 local left_list = {} -- Table for left column in txt file
 local right_list = {} -- Table for right column in txt file
 
+--- Function to parse the list
+-- @param path The path of the file to parse
 function parse_list(path)
     local file = io.open(path, "r") -- Parse input file
 
@@ -18,16 +20,28 @@ function parse_list(path)
         end
     end
 
-    file:close() -- IMPORTANT! Close file after processing it
+    file:close() -- IMPORTANT: Close file after processing it
 
     -- Print the parsed columns
-    print("Column 1:")
-    for _, value in ipairs(left_list) do print(value) end
+    -- print("Column 1:")
+    -- for _, value in ipairs(left_list) do print(value) end
 
-    print("Column 2:")
-    for _, value in ipairs(right_list) do print(value) end
+    -- print("Column 2:")
+    -- for _, value in ipairs(right_list) do print(value) end
 end
 
-parse_list("historian-hysteria-input.txt")
+--- Function to calculate the distance
+-- @param first_list The first list to sort 
+-- @param second_list The second list to sort
+-- function calc_distance(first_list, second_list)
+--     first_list.sort()
+--     second_list.sort()
+
+--     print(first_list, second_list)
+-- end
+
+-- -- Fn calls
+-- parse_list("historian-hysteria-input.txt")
+-- calc_distance(left_list, right_list)
 
 
