@@ -136,7 +136,15 @@ Example: `3` in the left list, but `3` doesn't appear in the right list; `3 * 0 
 Example: `4` in the left list, `4` appears 5x in the right list; `4 * 5 = 20`.
 
 ```lua
-<NUMBER_VALUE> * <OCCURENCE_COUNT> = <SIMILARITY_SCORE>
+-- <NUMBER_VALUE> * <OCCURENCE_COUNT> = <SIMILARITY_SCORE>
 
+for i = 1, #left_list do
+    for j = 1, #right_list do
+        if left_list[i] == right_list[j] then
+            print("Left: " .. left_list[i])
+            print("Right: " .. right_list[i])
+        end
+    end
+end
 
 ```
