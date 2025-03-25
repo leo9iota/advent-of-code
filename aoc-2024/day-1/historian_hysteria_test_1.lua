@@ -6,6 +6,9 @@ local lines = {
     "66575 90774"
 }
 
+local num = 23.23
+print(num) -- comment
+
 for _, line in ipairs(lines) do
     local firstColumn, secondColumn = line:match("(%d+)%s+(%d+)")
     if firstColumn and secondColumn then
