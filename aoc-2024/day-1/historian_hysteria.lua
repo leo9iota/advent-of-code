@@ -28,11 +28,9 @@ local function calculate_similarity(left_list, right_list)
     local total_similarity_score
 
     for i = 1, #left_list do
+        print(left_list[i])
         for j = 1, #right_list do
-            if left_list[i] == right_list[j] then
-                print("Left: " .. left_list[i])
-                print("Right: " .. right_list[i])
-            end
+            print("Left list: " .. left_list[i] .. " => " .. "right list: " .. right_list[j])
         end
     end
 

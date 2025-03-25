@@ -31,4 +31,13 @@ print_table(left_list)
 print("Right List:")
 print_table(right_list)
 
+local function calculate_similarity(left_list, right_list)
+    for i = 1, #left_list do
+        print(left_list[i])
+        for j = 1, #right_list do
+            print("Left list: " .. left_list[i] .. " => " .. "right list: " .. right_list[j])
+        end
+    end
+end
 
+calculate_similarity(left_list, right_list)
