@@ -21,8 +21,17 @@ local function calculate_distance(left_list, right_list)
 end
 
 -- Part 2
-local function calc_similarity(left_list, right_list)
+local function calculate_similarity(left_list, right_list)
     local total_similarity_score
+
+    for i = 1, #left_list do
+        for j = 1, #right_list do
+            if left_list[i] == right_list[j] then
+                print("Left: " .. left_list[i])
+                print("Right: " .. right_list[i])
+            end
+        end
+    end
 
     return total_similarity_score
 end
@@ -31,7 +40,9 @@ local function main()
     local input_file = "historian-hysteria-input.txt"
     local left_list, right_list = read_input(input_file)
     local total_distance = calculate_distance(left_list, right_list)
+    local total_similarity_score = calculate_similarity(left_list, right_list)
     print("Total distance: " .. total_distance)
+    print("Similarity score: " .. total_similarity_score)
 end
 
 main()
