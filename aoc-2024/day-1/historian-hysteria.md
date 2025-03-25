@@ -69,14 +69,14 @@ Here are the same example lists again:
 ```
 For these example lists, here is the process of finding the similarity score:
 
-- The first number in the left list is 3. It appears in the right list three times, so the similarity score increases by 3 * 3 = 9.
-- The second number in the left list is 4. It appears in the right list once, so the similarity score increases by 4 * 1 = 4.
-- The third number in the left list is 2. It does not appear in the right list, so the similarity score does not increase (2 * 0 = 0).
-- The fourth number, 1, also does not appear in the right list.
-- The fifth number, 3, appears in the right list three times; the similarity score increases by 9.
-- The last number, 3, appears in the right list three times; the similarity score again increases by 9.
+- The first number in the left list is `3`. It appears in the right list three times, so the similarity score increases by `3 * 3 = 9`.
+- The second number in the left list is `4`. It appears in the right list once, so the similarity score increases by `4 * 1 = 4`.
+- The third number in the left list is `2`. It does not appear in the right list, so the similarity score does not increase `(2 * 0 = 0)`.
+- The fourth number, `1`, also does not appear in the right list.
+- The fifth number, `3`, appears in the right list three times; the similarity score increases by `9`.
+- The last number, `3`, appears in the right list three times; the similarity score again increases by `9`.
 
-So, for these example lists, the similarity score at the end of this process is 31 (9 + 4 + 0 + 0 + 9 + 9).
+So, for these example lists, the similarity score at the end of this process is `31` `(9 + 4 + 0 + 0 + 9 + 9)`.
 
 Once again consider your left and right lists. What is their similarity score?
 
@@ -121,8 +121,19 @@ end
 
 1. Count individual numbers.
 2. Check if the indiviual numbers from the left list appear in the right list, if they do, check how often they appear in the left list.
-3. If they appear in the left list but not in the right list its basically just: x * 0 = 0, so basically just write a 0. (basically speaking)
-4. Sum up the similarity score, and done.
+3. If they appear in the left list but not in the right list its basically just: `x * 0 = 0`, so basically just write a `0`, and vice verca. (basically speaking)
+4. So the rule is, the number has to appear in the list that is getting compared at least once. *[1] 
+5. Sum up the similarity score, and done.
+
+#### Revision
+
+1. You loop through the lists 2 times, first time you compare left to right list, then sum it up.
+2. Then you compare right to left list, and sum it up.
+3. Sum up both values.
+
+*[1]
+Example: `3` in the left list, but `3` doesn't appear in the right list; `3 * 0 = 0`.
+Example: `4` in the left list, `4` appears 5x in the right list; `4 * 5 = 20`.
 
 ```lua
 <NUMBER_VALUE> * <OCCURENCE_COUNT> = <SIMILARITY_SCORE>
