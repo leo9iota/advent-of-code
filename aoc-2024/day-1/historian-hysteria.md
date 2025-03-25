@@ -101,6 +101,8 @@ Once again consider your left and right lists. What is their similarity score?
 4. Calculate the differences
 5. Sum the differences
 
+### Part 1
+
 ```lua
 left_list = {}
 right_list = {}
@@ -111,6 +113,19 @@ sorted_list_left = sort(left_list)
 sorted_list_right = sort(right_list)
 
 function sort_list()
-
+    -- TO BE IMPLEMENTED
 end
+```
+
+### Part 2
+
+1. Count individual numbers.
+2. Check if the indiviual numbers from the left list appear in the right list, if they do, check how often they appear in the left list.
+3. If they appear in the left list but not in the right list its basically just: x * 0 = 0, so basically just write a 0. (basically speaking)
+4. Sum up the similarity score, and done.
+
+```lua
+<NUMBER_VALUE> * <OCCURENCE_COUNT> = <SIMILARITY_SCORE>
+
+
 ```
