@@ -1,5 +1,3 @@
---- Function to parse both lists
--- @param filename
 local function read_input(filename)
     local left_list = {}
     local right_list = {}
@@ -13,9 +11,6 @@ local function read_input(filename)
     return left_list, right_list
 end
 
---- Function to calculate the total distance
--- @param left_list
--- @param right_list
 local function calc_distance(left_list, right_list)
     table.sort(left_list)
     table.sort(right_list)
