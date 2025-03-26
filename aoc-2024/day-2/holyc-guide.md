@@ -5,7 +5,7 @@
 1. Clone the repository from GitHub
 
 ```sh
-https://github.com/Jamesbarford/holyc-lang.git
+git clone https://github.com/Jamesbarford/holyc-lang.git
 ```
 
 2. Change directory into project then build it
@@ -27,7 +27,7 @@ make -C ./build
 sudo make -C ./build install
 ```
 
-## Compiler & Run
+## Compile & Run
 
 1. Compile the `.HC` file
 
