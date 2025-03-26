@@ -40,3 +40,9 @@ hcc -o holyTemple holyTemple.HC
 ```sh
 chmod +x holyTemple.out && ./holyTemple.out 
 ```
+
+## Naming Convention
+
+- **File Names**: Use camelCase.
+- **Function Names**: Use PascalCase.
+- **Variables**: Use snake_case.
