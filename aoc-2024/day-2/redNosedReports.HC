@@ -1,3 +1,13 @@
+#include <stdio.h>
+
+// Define "Print" function that wraps "printf" (similar to the HolyC-style in TempleOS)
+U0 Print(U8 *format, ...) {
+  va_list args;
+  va_start(args, format);
+  vprintf(format, args);
+  va_end(args);
+}
+
 U0 Main() {
   U8 *filename = "red-nosed-reports-input.txt";
   U8 *buffer;
