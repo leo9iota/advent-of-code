@@ -38,7 +38,7 @@ hcc -o holyTemple holyTemple.HC
 2. Run the `a.out` file
 
 ```sh
-chmod +x holyTemple.out && ./holyTemple.out 
+chmod +x holyTemple && ./holyTemple 
 ```
 
 ## Naming Convention
