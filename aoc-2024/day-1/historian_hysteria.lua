@@ -19,7 +19,9 @@ local function calculate_distance(left_list, right_list)
     table.sort(right_list)
     local total_distance = 0
     -- The # operator gets the length of the table (Lua has a 1-based index btw)
-    for i = 1, #left_list do total_distance = total_distance + math.abs(left_list[i] - right_list[i]) end
+    for i = 1, #left_list do
+        total_distance = total_distance + math.abs(left_list[i] - right_list[i])
+    end
     return total_distance
 end
 
