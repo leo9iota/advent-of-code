@@ -1,52 +1,64 @@
-U0 ParseTextFile(U8 *filename)
+U0 ParseFile(U8 *filename, U0 (*process_line)(U8 *line))
 {
-  CDoc *doc = NULL;
-  U8 *buf = NULL;
-  I64 file_size;
-
-  // Try to open and read the file
-  try {
-    // Read entire file into a buffer
-    buf = FileRead(filename, &file_size);
-    if (!buf) {
-      Print("Error: Could not read file '%s'\n", filename);
-      return;
-    }
-
-    // Create a new document to process the file content
-    doc = DocNew;
-    DocPrint(doc, "%s", buf); // Load buffer into document
-
-    // Process the file line by line
-    CDocEntry *doc_e = doc->head.next;
-    while (doc_e != doc) {
-      if (doc_e->type_u8 == DOCT_TEXT) {
-        // Process each line here
-        Print("Line: %s\n", doc_e->tag);
-        
-        // Example: Split by spaces
-        U8 *token;
-        token = StrFirstOcc(doc_e->tag, " ");
-        if (token) {
-          *token = 0; // Null terminate at space
-          Print("First word: %s\n", doc_e->tag);
-          Print("Rest: %s\n", token + 1);
-        }
-      }
-      doc_e = doc_e->next;
-    }
-
-  } catch {
-    Print("Error occurred: %s\n", Fs->except_callers[0]);
+  I64 file_size = 0;
+  U8 *buffer = FileRead(filename, &file_size);
+  
+  if (!buffer) {
+    "Error: Failed to read file %s\n", filename;
+    return;
   }
-
-  // Clean up resources
-  if (buf) Free(buf);
-  if (doc) DocDel(doc);
+  
+  // Parse file line by line
+  U8 *line_start = buffer;
+  U8 *line_end;
+  U8 temp_char;
+  
+  while (line_start < buffer + file_size) {
+    // Find end of line
+    line_end = StrFirstOcc(line_start, "\n");
+    if (!line_end) 
+      line_end = buffer + file_size; // Last line might not have newline
+    
+    // Temporarily null-terminate this line
+    temp_char = *line_end;
+    *line_end = 0;
+    
+    // Process the line using the callback function
+    process_line(line_start);
+    
+    // Restore character and move to next line
+    *line_end = temp_char;
+    line_start = line_end + 1;
+  }
+  
+  Free(buffer);
 }
 
-U0 Main()
+// Example usage with a callback function
+U0 PrintLine(U8 *line)
 {
-  // Example usage - assuming text file is named "example.txt"
-  ParseTextFile("example.txt");
+  "%s\n", line;
+}
+
+U0 CountNumbers(U8 *line)
+{
+  I64 count = 0;
+  I64 i = 0;
+  
+  while (line[i]) {
+    if ('0' <= line[i] && line[i] <= '9')
+      count++;
+    i++;
+  }
+  
+  "Line contains %d numbers\n", count;
+}
+
+U0 Main() 
+{
+  "Parsing file and printing lines:\n";
+  ParseFile("./input.txt", &PrintLine);
+  
+  "Parsing file and counting numbers in each line:\n";
+  ParseFile("./input.txt", &CountNumbers);
 }
