@@ -1,42 +1,52 @@
-#include <stdio.h>
-
-// Define "Print" function that wraps "printf" (similar to the HolyC-style in TempleOS)
-U0 Print(U8 *format, ...) {
-  va_list args;
-  va_start(args, format);
-  vprintf(format, args);
-  va_end(args);
-}
-
-U0 Main() {
-  U8 *filename = "red-nosed-reports-input.txt";
-  U8 *buffer;
+U0 ParseTextFile(U8 *filename)
+{
+  CDoc *doc = NULL;
+  U8 *buf = NULL;
   I64 file_size;
 
-  // Read the entire file into a buffer
-  buffer = FileRead(filename, &file_size);
-  if (!buffer) {
-    Print("Error: Could not open file %s\n", filename);
-    return;
-  }
-
-  // Print the file contents
-  Print("File contents:\n%s\n", buffer);
-
-  // Simple parsing: count lines
-  I64 line_count = 0;
-  U8 *ptr = buffer;
-  while (*ptr) {
-    if (*ptr == '\n') {
-      line_count++;
+  // Try to open and read the file
+  try {
+    // Read entire file into a buffer
+    buf = FileRead(filename, &file_size);
+    if (!buf) {
+      Print("Error: Could not read file '%s'\n", filename);
+      return;
     }
-    ptr++;
-  }
-  Print("Number of lines: %d\n", line_count);
 
-  // Free the buffer
-  Free(buffer);
+    // Create a new document to process the file content
+    doc = DocNew;
+    DocPrint(doc, "%s", buf); // Load buffer into document
+
+    // Process the file line by line
+    CDocEntry *doc_e = doc->head.next;
+    while (doc_e != doc) {
+      if (doc_e->type_u8 == DOCT_TEXT) {
+        // Process each line here
+        Print("Line: %s\n", doc_e->tag);
+        
+        // Example: Split by spaces
+        U8 *token;
+        token = StrFirstOcc(doc_e->tag, " ");
+        if (token) {
+          *token = 0; // Null terminate at space
+          Print("First word: %s\n", doc_e->tag);
+          Print("Rest: %s\n", token + 1);
+        }
+      }
+      doc_e = doc_e->next;
+    }
+
+  } catch {
+    Print("Error occurred: %s\n", Fs->except_callers[0]);
+  }
+
+  // Clean up resources
+  if (buf) Free(buf);
+  if (doc) DocDel(doc);
 }
 
-// Invoke Main function
-Main;
+U0 Main()
+{
+  // Example usage - assuming text file is named "example.txt"
+  ParseTextFile("example.txt");
+}
