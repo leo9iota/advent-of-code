@@ -32,11 +32,11 @@ sudo make -C ./build install
 1. Compile the `.HC` file
 
 ```sh
-hcc holyTemple.HC
+hcc -o holyTemple holyTemple.HC
 ```
 
 2. Run the `a.out` file
 
 ```sh
-chmod +x a.out && ./a.out 
+chmod +x holyTemple.out && ./holyTemple.out 
 ```
