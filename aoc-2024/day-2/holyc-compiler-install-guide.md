@@ -1,4 +1,6 @@
-# HolyC Compiler Build Guide
+# HolyC Instructions
+
+## Build Compiler
 
 1. Clone the repository from GitHub
 
@@ -23,4 +25,18 @@ make -C ./build
 
 ```sh
 sudo make -C ./build install
+```
+
+## Compiler & Run
+
+1. Compile the `.HC` file
+
+```sh
+hcc holyTemple.HC
+```
+
+2. Run the `a.out` file
+
+```sh
+chmod +x a.out && ./a.out 
 ```
