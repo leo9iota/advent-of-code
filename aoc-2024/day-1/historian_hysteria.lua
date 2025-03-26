@@ -19,19 +19,24 @@ local function calculate_distance(left_list, right_list)
     table.sort(right_list)
     local total_distance = 0
     -- The # operator gets the length of the table (Lua has a 1-based index btw)
-    for i = 1, #left_list do total_distance = total_distance + math.abs(left_list[i] - right_list[i]) end
+    for i = 1, #left_list do
+        total_distance = total_distance + math.abs(left_list[i] - right_list[i])
+    end
     return total_distance
 end
 
 -- Part 2
 local function calculate_similarity(left_list, right_list)
-    local total_similarity_score
+    local total_similarity_score = 0
+    local right_freq = {} -- Make use of a frequency map (common DSA concept)
 
-    for i = 1, #left_list do
-        print(left_list[i])
-        for j = 1, #right_list do
-            print("Left list: " .. left_list[i] .. " => " .. "right list: " .. right_list[j])
-        end
+    for _, num in ipairs(right_list) do
+        right_freq[num] = (right_freq[num] or 0) + 1
+    end
+
+    for _, num in ipairs(left_list) do
+        local count = right_freq[num] or 0
+        total_similarity_score = total_similarity_score + num * count
     end
 
     return total_similarity_score
@@ -42,8 +47,8 @@ local function main()
     local left_list, right_list = read_input(input_file)
     local total_distance = calculate_distance(left_list, right_list)
     local total_similarity_score = calculate_similarity(left_list, right_list)
-    print("Total distance: " .. total_distance)
-    print("Similarity score: " .. total_similarity_score)
+    print("Distance:", total_distance)
+    print("Similarity:", total_similarity_score)
 end
 
 main()
