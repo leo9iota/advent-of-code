@@ -2,7 +2,7 @@
 
 ## 🛠️ Languages
 
-![Tech Stack](https://go-skill-icons.vercel.app/api/icons?i=ts,lua,nim)
+![Languages](https://go-skill-icons.vercel.app/api/icons?i=ts,lua,nim)
 
 ## 2023
 
