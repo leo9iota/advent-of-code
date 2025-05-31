@@ -1,50 +1,42 @@
-## calc.nim – minimal CLI calculator
-## usage:
-##   nim r calc.nim 12 + 7
-##   nim r calc.nim 5 * 3
-##   nim r calc.nim 10 / 0      # division-by-zero guard
-import os
-import strutils, strformat # basic string helpers
+import strutils, strformat, terminal
 
-proc usage() =
-    echo """
-    NimCalc – a tiny command-line calculator
-    Usage:
-        nimcalc <num1> <op> <num2>
+proc askFloat(prompt: string): float =
+    while true:
+        stdout.styledWrite(fgGreen, prompt)
+        let line = readLine(stdin)
+        try: return line.parseFloat
+        except ValueError:
+            stdout.styledWriteLine(fgRed, "  ✖  Not a number, try again.")
 
-        <op>
-            +   addition
-            -   subtraction
-            *   multiplication
-            /   division
-    """
-    quit 1
+proc askOp(): char =
+    const ops = ['+', '-', '*', '/']
+    while true:
+        stdout.styledWrite(fgYellow, "Choose operator (+ - * /): ")
+        let op = readLine(stdin).strip
+        if op.len == 1 and op[0] in ops: return op[0]
+        stdout.styledWriteLine(fgRed, "  ✖  Invalid operator, pick one of the following operators: + - * /")
 
 when isMainModule:
-    ## Expect exactly three arguments after the program name.
-    if paramCount() != 3:
-        usage()
+    eraseScreen()
+    styledEcho(fgCyan, "NimLabs Innovations Ltd. 0.1.0 – Interactive CLI calculator written in Nim\n")
 
-    # Convert the two operands to float; let Nim raise an error on bad input.
-    let
-        a = parseFloat(paramStr(1))
-        op = paramStr(2)
-        b = parseFloat(paramStr(3))
+    while true:
+        let a = askFloat("First number: ")
+        let op = askOp()
+        let b = askFloat("Second number: ")
 
-    # Perform the chosen operation.
-    let result =
-        case op
-        of "+": a + b
-        of "-": a - b
-        of "*": a * b
-        of "/":
-            if b == 0:
-                echo "Error: division by zero"
-                quit 1
-            else:
-                a / b
-        else:
-            echo "Unknown operator: " & op
-            usage()
+        if op == '/' and b == 0:
+            styledEcho(fgRed, "  ✖  Division by zero is not allowed!\n")
+            continue
 
-    echo fmt"{a} {op} {b} = {result}"
+        let result = case op
+            of '+': a + b
+            of '-': a - b
+            of '*': a * b
+            else: a / b
+        styledEcho(fgBlue, fmt"{a} {op} {b} = {result}")
+
+        stdout.styledWrite(fgMagenta, "Another calculation? (y/n): ")
+        if readLine(stdin).strip.toLowerAscii != "y":
+            styledEcho(fgCyan, "Bye!\n")
+            break
