@@ -2,19 +2,30 @@
 # Repeat this procedure until you arrive at one.
 # E.g. 5 → odd → 3*5 + 1 = 16 → even → 16 / 2 = 8 → even → 4 → 2 → 1 → end!
 
-proc getUserInput(): string =
-    stdout.write "Enter an integer: "
-    let userInput: string = readLine(stdin)
-    echo "User chose: ", userInput, " as input."
+import strutils
 
-proc collatzConjecture(userInput: string): int =
-    if userInput % 2 != 0:
-        userInput * 3 + 1
-        echo userInput
-    else:
-        userInput / 2
-        echo userInput
+proc collatz(n: int): void =
+    var num = n
+    echo "\nCollatz sequence:"
+    while num != 1:
+        echo num
+        if num mod 2 == 0:
+            num = num div 2
+        else:
+            num = num * 3 + 1
+    echo num # print the final 1
+
+proc getUserInput(): int =
+    stdout.write "Enter a positive integer: "
+    let input = readLine(stdin)
+    try:
+        result = parseInt(input)
+        if result <= 0:
+            quit("Please enter a positive integer.")
+    except ValueError:
+        quit("Invalid input. Please enter a valid integer.")
 
 when isMainModule:
-    let userInput = getUserInput()
-    let collatzConjecture = collatzConjecture(userInput)
+    let userNum = getUserInput()
+    collatz(userNum)
+
