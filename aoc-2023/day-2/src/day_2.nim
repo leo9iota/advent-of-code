@@ -1,4 +1,4 @@
-import std/[strutils, parseutils, os]
+import std/[strutils, parseutils, os, tables]
 
 type
     ObservedCube* = object
