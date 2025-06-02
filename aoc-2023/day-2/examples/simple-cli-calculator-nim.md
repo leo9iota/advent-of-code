@@ -1,3 +1,7 @@
+# Simple CLI Calculator in Nim
+
+
+```nim
 import strutils, strformat, terminal
 
 proc askFloat(prompt: string): float =
@@ -40,3 +44,4 @@ when isMainModule:
         if readLine(stdin).strip.toLowerAscii != "y":
             styledEcho(fgCyan, "Bye!\n")
             break
+```

@@ -1,3 +1,6 @@
+# String Concatenation in Nim
+
+```nim
 var
     p = "abc"
     q = "xy"
@@ -13,4 +16,4 @@ echo "concat: ", p & q
 
 echo "p is still: ", p
 echo "q is still: ", q
-
+```
