@@ -50,19 +50,37 @@ proc possible(g: Game): bool =
                 return false
     result = true
 
+proc minimumCubes(g: Game): Table[string, int] =
+    result = {"red": 0, "green": 0, "blue": 0}.toTable
+    for round in g.rounds:
+        for cube in round:
+            if cube.count > result[cube.color]:
+                result[cube.color] = cube.count
+
+proc power(g: Game): int =
+    let minCubes = minimumCubes(g)
+    result = minCubes["red"] * minCubes["green"] * minCubes["blue"]
+
 when isMainModule:
     if paramCount() == 0:
         quit "usage: day_2 <input_file>"
 
     var sumIds = 0
+    var sumPowers = 0
+
     for line in lines(paramStr(1)):
         if line.strip.len == 0: continue
         let game = parseGameLine(line)
+        let gamePower = power(game)
+
+        sumPowers += gamePower
 
         if possible(game):
             sumIds += game.id
-            echo "✔ ", game
+            echo "✔ Game ", game.id, " (power: ", gamePower, ")"
         else:
-            echo "✘ ", game
+            echo "✘ Game ", game.id, " (power: ", gamePower, ")"
 
-    echo "Sum of possible game IDs = ", sumIds
+    echo ""
+    echo "Part 1 - Sum of possible game IDs: ", sumIds
+    echo "Part 2 - Sum of all game powers: ", sumPowers
