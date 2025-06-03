@@ -12,9 +12,11 @@ type
         rounds*: seq[ObservedSet]
 
 proc parseObservedCube*(token: string): ObservedCube =
-    var i = 0
-    result.count = parseInt(token, i)
-    result.color = token[i .. ^1].strip.toLowerAscii()
+    let parts = token.strip.split(' ')
+    if parts.len != 2:
+        raise newException(ValueError, "malformed cube token: " & token)
+    result.count = parts[0].parseInt
+    result.color = parts[1].toLowerAscii()
 
 proc parseObservedSet*(line: string): ObservedSet =
     for part in line.split(','):
@@ -41,6 +43,9 @@ const bagLimits = {"red": 12, "green": 13, "blue": 14}.toTable
 proc possible(g: Game): bool =
     for round in g.rounds:
         for cube in round:
+            if not bagLimits.hasKey(cube.color):
+                echo "Warning: unknown color '", cube.color, "'"
+                return false
             if cube.count > bagLimits[cube.color]:
                 return false
     result = true
@@ -54,7 +59,7 @@ when isMainModule:
         if line.strip.len == 0: continue
         let game = parseGameLine(line)
 
-        if game.possible:
+        if possible(game):
             sumIds += game.id
             echo "✔ ", game
         else:
