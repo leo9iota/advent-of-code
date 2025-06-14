@@ -1,1 +1,11 @@
+# TS & JS
 node_modules/
+
+# Gleam
+*.beam
+*.ez
+build
+erl_crash.dump
+
+# HolyC
+/holyc-lang/build/
