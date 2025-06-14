@@ -2,7 +2,11 @@
 
 ## 🛠️ Languages
 
-![Languages](https://go-skill-icons.vercel.app/api/icons?i=ts,lua,holyc,nim)
+<p align="center">
+  <a>
+    <img src="https://go-skill-icons.vercel.app/api/icons?i=ts,js,lua,nim,zig,gleam,elixir,go,rust,java,cs,c,cpp,holyc,erlang,haskell,python,v,asm,postgres&perline=10" />
+  </a>
+</p>
 
 ## 2023
 
