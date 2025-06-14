@@ -45,9 +45,23 @@ const bagLimits = {"red": 12, "green": 13, "blue": 14}.toTable
 proc possible(g: Game): bool =
     for round in g.rounds:
         for cube in round:
+            if not bagLimits.hasKey(cube.color):
+                echo "Warning: unknown color '", cube.color, "'"
+                return false
             if cube.count > bagLimits[cube.color]:
                 return false
     result = true
+
+proc minimumCubes(g: Game): Table[string, int] =
+    result = {"red": 0, "green": 0, "blue": 0}.toTable
+    for round in g.rounds:
+        for cube in round:
+            if cube.count > result[cube.color]:
+                result[cube.color] = cube.count
+
+proc power(g: Game): int =
+    let minCubes = minimumCubes(g)
+    result = minCubes["red"] * minCubes["green"] * minCubes["blue"]
 
 when isMainModule:
     # echo "paramCount = ", paramCount()
@@ -59,12 +73,14 @@ when isMainModule:
         else: quit("Usage: day_2 <input_file>")
 
     var sumIds = 0
-    for line in lines(inputPath):
+    for line in lines(paramStr(1)):
         if line.strip.len == 0: continue
         let game = parseGameLine(line)
+
         if game.possible:
             sumIds += game.id
-            echo "✔ ", game
+            echo "✔ Game ", game.id, " (power: ", gamePower, ")"
         else:
             echo "✘ ", game
+
     echo "Sum of possible game IDs = ", sumIds
