@@ -1,13 +1,49 @@
+import day3
 import gleeunit
+import gleeunit/should
 
 pub fn main() -> Nil {
   gleeunit.main()
 }
 
-// gleeunit test functions end in `_test`
-pub fn hello_world_test() {
-  let name = "Joe"
-  let greeting = "Hello, " <> name <> "!"
+pub fn example_test() {
+  let example_input =
+    "467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598.."
 
-  assert greeting == "Hello, Joe!"
+  day3.solve_part1(example_input)
+  |> should.equal(4361)
+}
+
+pub fn is_digit_test() {
+  day3.is_digit("5")
+  |> should.equal(True)
+
+  day3.is_digit("a")
+  |> should.equal(False)
+
+  day3.is_digit(".")
+  |> should.equal(False)
+}
+
+pub fn is_symbol_test() {
+  day3.is_symbol("*")
+  |> should.equal(True)
+
+  day3.is_symbol("#")
+  |> should.equal(True)
+
+  day3.is_symbol(".")
+  |> should.equal(False)
+
+  day3.is_symbol("5")
+  |> should.equal(False)
 }
