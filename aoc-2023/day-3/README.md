@@ -1,20 +1,20 @@
-# day_3
+# gear_ratios
 
-[![Package Version](https://img.shields.io/hexpm/v/day_3)](https://hex.pm/packages/day_3)
-[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/day_3/)
+[![Package Version](https://img.shields.io/hexpm/v/gear_ratios)](https://hex.pm/packages/gear_ratios)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/gear_ratios/)
 
 ```sh
-gleam add day_3@1
+gleam add gear_ratios@1
 ```
 ```gleam
-import day_3
+import gear_ratios
 
 pub fn main() -> Nil {
   // TODO: An example of the project in use
 }
 ```
 
-Further documentation can be found at <https://hexdocs.pm/day_3>.
+Further documentation can be found at <https://hexdocs.pm/gear_ratios>.
 
 ## Development
 

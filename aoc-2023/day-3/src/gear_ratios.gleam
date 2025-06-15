@@ -1,5 +1,5 @@
 import gleam/io
 
 pub fn main() -> Nil {
-  io.println("Hello from day_3!")
+  io.println("Hello from gear_ratios!")
 }
