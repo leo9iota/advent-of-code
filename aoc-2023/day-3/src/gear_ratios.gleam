@@ -1,15 +1,23 @@
 import gleam/io
 import gleam/list
 import gleam/string
+import simplifile
 
 pub fn main() {
-  let test_lines = [
-    ".......497...........................858...923...128..................227..801........487.....664...........................................",
-    "436........765..............140.......+....................859.............*.........+.................960........668.......................",
-    "...*982...........=..........=....203......266.263...375*....=...402....691..-....................*..........575....................13......",
-  ]
+  let file_path = "gear-ratios-input.txt"
 
-  parse_grid(test_lines)
+  case simplifile.read(file_path) {
+    Ok(content) -> {
+      let lines =
+        string.split(content, "\n")
+        |> list.filter(fn(line) { !string.is_empty(line) })
+      parse_grid(lines)
+    }
+    Error(reason) -> {
+      io.println("Error reading file: " <> string.inspect(reason))
+      []
+    }
+  }
 }
 
 fn parse_grid(lines: List(String)) {
