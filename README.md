@@ -8,6 +8,14 @@
   </a>
 </p>
 
+## Esolangs
+
+- Befunge
+- LOLCODE
+- [BQN](https://github.com/mlochbaum/BQN)
+- 
+
+
 ## 2023
 
 1. [Trebuchet](./aoc-2023/day-1/trebuchet.ts)
