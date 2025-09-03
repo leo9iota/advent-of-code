@@ -2,7 +2,7 @@
 
 ## General
 
-- [ ] Scaffold Rust project with Rustup.
+- [x] Scaffold Rust project with Rustup.
 
 
 ## File
