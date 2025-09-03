@@ -1,0 +1,9 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "2022/day-2/Cargo.toml"
+    ],
+    "rust-analyzer.cargo.buildScripts.enable": true,
+    "rust-analyzer.server.path": "rust-analyzer.exe",
+    "rust-analyzer.cargo.sysroot": "C:\\Users\\Nine\\scoop\\persist\\rustup\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc",
+    "rust-analyzer.rustc.source": "discover"
+}
