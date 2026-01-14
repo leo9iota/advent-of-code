@@ -8,20 +8,24 @@
   </a>
 </p>
 
-## Esolangs
+## Esolangs I wanna try out
 
-- Befunge
-- LOLCODE
-- [BQN](https://github.com/mlochbaum/BQN)
-- 
+- [Befunge](https://esolangs.org/wiki/Befunge)
+- [LOLCODE](https://en.wikipedia.org/wiki/LOLCODE)
+- [BQN](https://aplwiki.com/wiki/BQN)
 
 
 ## 2023
 
-1. [Trebuchet](./aoc-2023/day-1/trebuchet.ts)
-2. [Cube Conundrum](./aoc-2023/day-2/cube-conundrum.ts)
+1. [Day 1: Trebuchet](./2023/day01/trebuchet.ts)
+2. [Day 2: Cube Conundrum](./2023/day02/cube-conundrum.ts)
+3. [Day 3: Gear Ratios](./2023/day03/gear_ratios.gleam)
 
 ## 2024
 
-1. [Historian Hysteria](./aoc-2024/day-1/historian_hysteria.lua)
-2. [Red Nosed Reports](./aoc-2024/day-2/RedNosedReports.HC)
+1. [Day 1: Historian Hysteria](./2024/day01/historian_hysteria.lua)
+2. [Day 2: Red Nosed Reports](./2024/day02/RedNosedReports.HC)
+
+## 2025
+
+1. [Day 1: Secret Entrance](./2025/day01/secret_entrance.py)
