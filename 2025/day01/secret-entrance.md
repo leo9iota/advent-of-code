@@ -1,4 +1,4 @@
-    # Day 1: Secret Entrance
+# Day 1: Secret Entrance
 
 >Story (skippable)
 

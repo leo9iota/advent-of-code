@@ -1,20 +1,30 @@
 def parse_input(path: str) -> tuple[list[str], list[int]]:
-    directions: list[str] = []  # init list for storing direction
-    steps: list[int] = []  # init list for storing step
+    directions: list[str] = []  # init list for storing directions
+    steps: list[int] = []  # init list for storing steps
 
     with open(file=path, mode="r") as file:  # safely open file
         for line in file:
             clean_line: str = line.strip()  # strip whitespace and invisible '\n'
-            directions += clean_line[:1]  # extract the first char
+            directions.append(clean_line[:1])  # extract the first char
             steps.append(int(clean_line[1:]))  # extract everything after the first char
 
     return directions, steps
 
 
 def solve() -> None:
-    d, s = parse_input(path="./secret-entrance-input.txt")
+    direction, step = parse_input(path="./example-input.txt")
 
-    print(d, s)
+    current_pos = 0
+
+    for d, s in zip(direction, step, strict=False):
+        if d == "R":
+            current_pos += s
+        elif d == "L":
+            current_pos -= s
+
+        current_pos %= 100
+
+    print(f"Final Dial Position: {current_pos}")
 
 
 solve()
