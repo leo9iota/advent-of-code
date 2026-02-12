@@ -47,5 +47,10 @@ def solve_part_1() -> None:
     print(f"Total times landed on zero: {zero_landings}")
 
 
+def solve_part_2() -> None:
+    print("p2")
+
+
 if __name__ == "__main__":
     solve_part_1()
+    solve_part_2()
