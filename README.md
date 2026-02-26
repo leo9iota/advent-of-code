@@ -4,7 +4,7 @@
 
 <p align="center">
   <a>
-    <img src="https://go-skill-icons.vercel.app/api/icons?i=python,lua,ts,gleam,rust,zig,nim,c,cpp,holyc,assembly&perline=10" />
+    <img src="https://go-skill-icons.vercel.app/api/icons?i=python,lua,ts,gleam,rust,zig,nim,c,cpp,holyc,assembly,surrealdb&perline=10" />
   </a>
 </p>
 
