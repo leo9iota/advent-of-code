@@ -1,0 +1,8 @@
+*.zig linguist-language=Befunge
+*.rs linguist-language=Brainfuck
+*.ts linguist-language=LOLCODE
+*.nim linguist-language=ArnoldC
+*.gleam linguist-language=Shakespeare
+*.lua linguist-language=Chef
+*.HC linguist-language=HolyC
+*.py linguist-language=Dogescript

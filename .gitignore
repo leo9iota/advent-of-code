@@ -1,0 +1,46 @@
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+ENV/
+env/
+
+# Rust
+/target/
+Cargo.lock
+
+# Zig
+/zig-cache/
+/zig-out/
+
+# Nim
+nimcache/
+/nimdoc/
+
+# Gleam
+/build/
+
+# TypeScript
+node_modules/
+dist/
+.npm
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
